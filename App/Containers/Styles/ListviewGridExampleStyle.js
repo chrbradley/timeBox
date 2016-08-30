@@ -8,6 +8,11 @@ export default StyleSheet.create({
     marginTop: Metrics.navBarHeight,
     backgroundColor: Colors.background
   },
+  listContent: {
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
   row: {
     width: 100,
     height: 100,
@@ -29,9 +34,4 @@ export default StyleSheet.create({
     color: Colors.snow,
     textAlign: 'center'
   },
-  listContent: {
-    justifyContent: 'space-around',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  }
 })

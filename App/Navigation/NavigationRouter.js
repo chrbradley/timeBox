@@ -29,7 +29,7 @@ class NavigationRouter extends Component {
       <Router>
         <Scene initial key='splash' component={Splash} title='Splash' hideNavBar={true} />
 
-        <Scene key='year' component={Year} title='Year' />
+        <Scene initial key='year' component={Year} title='Year' />
 
         <Scene key='drawer' component={NavigationDrawer}>
 

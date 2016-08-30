@@ -1,5 +1,11 @@
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import { ApplicationStyles, Metrics, Colors } from '../../Themes/'
+
+const { width, height } = Dimensions.get('window')
+const rowWidth = width * 0.3;
+const rowHeight = rowWidth;
+const dateWidth = rowWidth / 7;
+const dateHeight = dateWidth;
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -8,30 +14,46 @@ export default StyleSheet.create({
     marginTop: Metrics.navBarHeight,
     backgroundColor: Colors.background
   },
-  row: {
-    width: 100,
-    height: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: Metrics.baseMargin,
-    backgroundColor: Colors.fire,
-    borderRadius: Metrics.smallMargin
+  title: {
+    margin: Metrics.smallMargin,
   },
-  boldLabel: {
+  listContent: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  listRow: {
+    width: rowWidth,
+    height: rowHeight,
+    margin: Metrics.smallMargin,
+    backgroundColor: Colors.fire,
+  },
+  monthLabel: {
     fontWeight: 'bold',
-    alignSelf: 'center',
+    // alignSelf: 'center',
+    // textAlign: 'center',
+    marginBottom: Metrics.smallMargin,
     color: Colors.snow,
+  },
+  monthRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    // flexWrap: 'nowrap',
+    // alignItems: 'space-around',
+  },
+  dateContainer: {
+    backgroundColor: Colors.coal,
+    width: dateWidth,
+    height: dateHeight,
+  },
+  dateText: {
     textAlign: 'center',
-    marginBottom: Metrics.smallMargin
+    fontSize: 10,
+    color: Colors.snow,
   },
   label: {
     alignSelf: 'center',
     color: Colors.snow,
     textAlign: 'center'
   },
-  listContent: {
-    justifyContent: 'space-around',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  }
 })
