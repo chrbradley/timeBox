@@ -1,8 +1,12 @@
 import React from 'react'
 import { ScrollView, Text, ListView, View } from 'react-native'
 import { connect } from 'react-redux'
+
 import Actions from '../Actions/Creators'
 import { Actions as NavigationActions } from 'react-native-router-flux'
+
+// For empty lists
+import AlertMessage from '../Components/AlertMessageComponent'
 
 // Styles
 import styles from './Styles/YearStyle'
@@ -12,69 +16,101 @@ import moment from 'moment';
 import { map } from 'lodash';
 import { buildCalendar } from '../Lib/CalendarHelpers';
 
+// detect changes
+const rowHasChanged = (r1, r2) => r1 !== r2;
+// DataSource configured
+const ds = new ListView.DataSource({rowHasChanged});
+
 class Year extends React.Component {
 
   constructor (props) {
     super(props)
+
+
     this.state = {
       building: true,
-      calendar: null,
+      year: null,
+      dataSource: null,
     }
   }
 
-  // componentWillMount () {
-  //   buildCalendar();
-  // }
+  componentWillMount () {
+    let year = moment().get('year');
+    console.log('year: ', year);
 
-  componentDidMount() {
-    let calendar = buildCalendar()
+    let dataObjects = buildCalendar(year);
+    console.log('dataObjects: ', dataObjects);
+
+
     this.setState({
       building: false,
-      calendar: calendar,
-    })
+      year,
+      dataSource: ds.cloneWithRows(dataObjects[year]),
+    });
   }
-  renderDay(day, key) {
-    console.log('day: ', key);
+
+  // componentDidMount() {
+  //   let calendar = buildCalendar()
+  //   this.setState({
+  //     building: false,
+  //     calendar: calendar,
+  //   })
+  // }
+  //
+  // renderDay(day, key) {
+  //   // console.log('day: ', key);
+  //   return (
+  //     <View style={styles.container}>
+  //       <Text style={styles.label}>{key}</Text>
+  //     </View>
+  //   )
+  // }
+  //
+  // renderWeek(week, key) {
+  //   // console.log('week: ', key);
+  //   return (
+  //     <View style={styles.container}>
+  //       {map(week, (day, key) => this.renderDay(day, key))}
+  //     </View>
+  //   )
+  // }
+  //
+  // renderMonth(month, i) {
+  //   // console.log('month: ', i);
+  //   let displayMonth = moment().month(i).format('MMM');
+  //   return (
+  //     <View key={`${displayMonth}i`} style={styles.monthContainer}>
+  //       <Text style={styles.boldLabel}>{displayMonth}</Text>
+  //       {map(month, (week, key) => this.renderWeek(week, key))}
+  //     </View>
+  //   )
+  // }
+
+  _renderRow (rowData) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.label}>{key}</Text>
+      <View style={styles.row}>
+        <Text style={styles.boldLabel}>{rowData.month}</Text>
+        <Text style={styles.label}>Row Description</Text>
       </View>
     )
   }
 
-  renderWeek(week, key) {
-    console.log('week: ', key);
-    return (
-      <View style={styles.container}>
-        {map(week, (day, key) => this.renderDay(day, key))}
-      </View>
-    )
-  }
-
-  renderMonth(month, i) {
-    console.log('month: ', i);
-    let displayMonth = moment().month(i).format('MMM');
-    return (
-      <View key={`${displayMonth}i`} style={styles.monthContainer}>
-        <Text style={styles.boldLabel}>{displayMonth}</Text>
-        {map(month, (week, key) => this.renderWeek(week, key))}
-      </View>
-    )
+  _noRowData () {
+    console.log('rowCount(): ', this.state.dataSource.getRowCount());
+    return this.state.dataSource.getRowCount() === 0;
   }
 
   render () {
-    let { calendar } = this.state;
-    let result = null;
-    let year = new moment().get('year');
-    if (calendar) {
-      console.log('calendar: ', calendar);
-      result = (
-        <View style={styles.container}>
-          {/* <Text style={styles.boldLabel}>{year}</Text> */}
-          {map(calendar[year], (month, i) => this.renderMonth(month, i))}
-        </View>);
-    }
-    return result;
+    return (
+      <View style={styles.container}>
+        <AlertMessage title='Nothing to See Here, Move Along' show={this._noRowData()} />
+        <ListView
+          contentContainerStyle={styles.listContent}
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow}
+        />
+      </View>
+    )
   }
 }
 

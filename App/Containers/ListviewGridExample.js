@@ -31,7 +31,7 @@ class ListviewGridExample extends React.Component {
     * STEP 2
     * Teach datasource how to detect if rows are different
     * Make this function fast!  Perhaps something like:
-    *   (r1, r2) => r1.id !== r2.id}
+    *   (r1, r2) => r1.id !== r2.id
     *************************************************************/
     const rowHasChanged = (r1, r2) => r1 !== r2
 

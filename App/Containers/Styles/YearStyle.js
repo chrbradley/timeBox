@@ -1,27 +1,32 @@
 import { StyleSheet } from 'react-native'
-import { Colors, Metrics, ApplicationStyles } from '../../Themes/'
+import { ApplicationStyles, Metrics, Colors } from '../../Themes/'
 
 export default StyleSheet.create({
+  ...ApplicationStyles.screen,
   container: {
     flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    backgroundColor: Colors.bloodOrange,
+    marginTop: Metrics.navBarHeight,
+    backgroundColor: Colors.background
   },
-  monthContainer: {
-    backgroundColor: Colors.background,
+  row: {
     width: 100,
     height: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: Metrics.baseMargin,
+    backgroundColor: Colors.fire,
+    borderRadius: Metrics.smallMargin
   },
   boldLabel: {
     fontWeight: 'bold',
     alignSelf: 'center',
-    color: Colors.coal,
+    color: Colors.snow,
     textAlign: 'center',
+    marginBottom: Metrics.smallMargin
   },
   label: {
     alignSelf: 'center',
-    color: Colors.coal,
+    color: Colors.snow,
     textAlign: 'center'
   },
   listContent: {
