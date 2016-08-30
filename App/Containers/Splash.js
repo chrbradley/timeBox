@@ -1,8 +1,10 @@
 import React, {PropTypes} from 'react'
 import { ScrollView, Text, KeyboardAvoidingView } from 'react-native'
 import { connect } from 'react-redux'
+
 import Actions from '../Actions/Creators'
 import { Metrics } from '../Themes'
+
 // external libs
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Animatable from 'react-native-animatable'
@@ -24,7 +26,7 @@ class Splash extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => {console.log('splash fired'); this.props.drawer()}, 2000);
+    setTimeout(() => { this.props.year() }, 200);
   }
 
   render () {
@@ -45,7 +47,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    drawer: NavigationActions.drawer,
+    year: NavigationActions.year,
   }
 }
 
