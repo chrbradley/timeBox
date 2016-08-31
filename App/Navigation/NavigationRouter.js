@@ -17,7 +17,7 @@ import ThemeScreen from '../Containers/ThemeScreen'
 import DeviceInfoScreen from '../Containers/DeviceInfoScreen'
 
 import Splash from '../Containers/Splash';
-import Year from '../Containers/Year';
+import YearList from '../Containers/YearList';
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -29,7 +29,7 @@ class NavigationRouter extends Component {
       <Router>
         <Scene initial key='splash' component={Splash} title='Splash' hideNavBar={true} />
 
-        <Scene initial key='year' component={Year} title='Year' />
+        <Scene initial key='year' component={YearList} title='Year' />
 
         <Scene key='drawer' component={NavigationDrawer}>
 

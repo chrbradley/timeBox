@@ -56,4 +56,4 @@ export default StyleSheet.create({
     color: Colors.snow,
     textAlign: 'center'
   },
-})
+});

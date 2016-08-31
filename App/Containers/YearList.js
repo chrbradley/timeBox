@@ -9,7 +9,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 import AlertMessage from '../Components/AlertMessageComponent'
 
 // Styles
-import styles from './Styles/YearStyle'
+import styles from './Styles/YearListStyle'
 
 // utilities
 import moment from 'moment';
@@ -40,7 +40,7 @@ const Week = (props) => {
   )
 }
 
-class Year extends Component {
+class YearList extends Component {
   constructor (props) {
     super(props)
 
@@ -103,4 +103,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Year)
+export default connect(mapStateToProps, mapDispatchToProps)(YearList)
