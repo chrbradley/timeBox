@@ -1,6 +1,8 @@
 import Calendar from 'moment-calendar'
+import moment from 'moment'
 
-export const buildCalendar = (year) => {
+export const buildCalendar = () => {
+  let year = moment().get('year')
   let calendar = new Calendar()
 
   let data = {}

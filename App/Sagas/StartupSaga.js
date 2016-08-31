@@ -3,6 +3,8 @@ import Types from '../Actions/Types'
 import Actions from '../Actions/Creators'
 import R from 'ramda'
 
+import { buildCalendar } from '../Lib/CalendarHelpers'
+
 // process STARTUP actions
 export function * watchStartup () {
   yield take(Types.STARTUP)
@@ -11,4 +13,8 @@ export function * watchStartup () {
   if (!R.is(Number, temp)) {
     yield put(Actions.requestTemperature('San Francisco'))
   }
+
+  let calendar = buildCalendar()
+
+  yield put(Actions.buildCalendar(calendar))
 }

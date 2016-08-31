@@ -13,7 +13,6 @@ import styles from './Styles/YearListStyle'
 // utilities
 import moment from 'moment'
 import { map } from 'lodash'
-import { buildCalendar } from '../Lib/CalendarHelpers'
 
 // detect changes
 const rowHasChanged = (r1, r2) => r1 !== r2
@@ -52,7 +51,7 @@ class YearList extends Component {
   componentWillMount () {
     let year = moment().get('year')
 
-    let dataObjects = buildCalendar(year)
+    let dataObjects = this.props.calendar
 
     this.setState({
       building: false,
@@ -99,6 +98,7 @@ class YearList extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    calendar: state.calendar.calendar
   }
 }
 
