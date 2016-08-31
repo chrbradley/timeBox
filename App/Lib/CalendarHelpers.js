@@ -1,6 +1,8 @@
 import Calendar from 'moment-calendar'
 import moment from 'moment'
 
+import { toUpper } from 'lodash'
+
 export const buildCalendar = () => {
   let year = moment().get('year')
   let calendar = new Calendar()
@@ -14,7 +16,8 @@ export const buildCalendar = () => {
   let months = calendar.months(year)
 
   months.forEach((month) => {
-    let monthAbrv = month.start.format('MMM')
+    let monthAbrv = toUpper(month.start.format('MMM'))
+
     let key = `${year}_${monthAbrv}`
 
     let monthObj = {

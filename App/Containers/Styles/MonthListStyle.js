@@ -31,7 +31,7 @@ export default StyleSheet.create({
     // borderColor: Colors.fire
   },
   monthLabel: {
-    fontSize: 40,
+    fontSize: 32,
     marginBottom: Metrics.smallMargin,
     color: Colors.coal
   },
@@ -43,7 +43,7 @@ export default StyleSheet.create({
   },
   dateContainer: {
     justifyContent: 'center',
-    backgroundColor: Colors.white,
+    // backgroundColor: Colors.white,
     width: dateWidth,
     height: dateHeight
   },
@@ -54,7 +54,7 @@ export default StyleSheet.create({
   },
   dateTextInactive: {
     textAlign: 'center',
-    fontSize: 20,
+    fontSize: 18,
     color: Colors.steel
   },
   label: {

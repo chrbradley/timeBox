@@ -14,8 +14,14 @@ export default StyleSheet.create({
     marginTop: Metrics.navBarHeight,
     backgroundColor: Colors.background
   },
+  titleContainer: {
+    borderBottomWidth: 1,
+    borderColor: Colors.steel
+  },
   title: {
-    margin: Metrics.smallMargin
+    margin: Metrics.smallMargin,
+    fontSize: 24,
+    fontWeight: '200'
   },
   listContent: {
     flexDirection: 'row',
@@ -26,31 +32,31 @@ export default StyleSheet.create({
     width: rowWidth,
     height: rowHeight,
     margin: Metrics.smallMargin,
-    backgroundColor: Colors.fire
+    backgroundColor: Colors.background
   },
   monthLabel: {
-    fontWeight: 'bold',
-    // alignSelf: 'center',
-    // textAlign: 'center',
+    fontSize: 14,
     marginBottom: Metrics.smallMargin,
-    color: Colors.snow
+    color: Colors.fire
   },
   monthRow: {
     flexDirection: 'row',
     justifyContent: 'space-around'
-    // flexWrap: 'nowrap',
-    // alignItems: 'space-around',
   },
   dateContainer: {
     justifyContent: 'center',
-    backgroundColor: Colors.coal,
     width: dateWidth,
     height: dateHeight
   },
   dateText: {
     textAlign: 'center',
     fontSize: 10,
-    color: Colors.snow
+    color: Colors.coal
+  },
+  dateTextInactive: {
+    textAlign: 'center',
+    fontSize: 6,
+    color: Colors.background
   },
   label: {
     alignSelf: 'center',

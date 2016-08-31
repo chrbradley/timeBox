@@ -25,7 +25,7 @@ const Day = (props) => {
   let { day } = props
   return (
     <View style={styles.dateContainer}>
-      <Text style={styles.dateText}>{day.date}</Text>
+      <Text style={day.notInMonth ? styles.dateTextInactive : styles.dateText}>{day.date}</Text>
     </View>
   )
 }
@@ -83,12 +83,12 @@ class YearList extends Component {
   }
 
   render () {
-    console.log('Year List this.props: ', this.props)
-
     return (
       <View style={styles.container}>
         <AlertMessage title='Nothing to See Here, Move Along' show={this._noRowData()} />
-        <Text style={styles.title}>{this.state.year}</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{this.state.year}</Text>
+        </View>
         <ListView
           contentContainerStyle={styles.listContent}
           dataSource={this.state.dataSource}
