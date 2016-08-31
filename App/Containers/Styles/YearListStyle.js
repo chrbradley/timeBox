@@ -42,6 +42,7 @@ export default StyleSheet.create({
     // alignItems: 'space-around',
   },
   dateContainer: {
+    justifyContent: 'center',
     backgroundColor: Colors.coal,
     width: dateWidth,
     height: dateHeight

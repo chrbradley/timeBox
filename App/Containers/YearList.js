@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { Text, ListView, View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
+import Actions from '../Actions/Creators'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 // For empty lists
@@ -13,6 +14,7 @@ import styles from './Styles/YearListStyle'
 // utilities
 import moment from 'moment'
 import { map } from 'lodash'
+import { buildCalendar } from '../Lib/CalendarHelpers'
 
 // detect changes
 const rowHasChanged = (r1, r2) => r1 !== r2
@@ -51,7 +53,7 @@ class YearList extends Component {
   componentWillMount () {
     let year = moment().get('year')
 
-    let dataObjects = this.props.calendar
+    let dataObjects = buildCalendar()
 
     this.setState({
       building: false,
@@ -81,6 +83,8 @@ class YearList extends Component {
   }
 
   render () {
+    console.log('Year List this.props: ', this.props)
+
     return (
       <View style={styles.container}>
         <AlertMessage title='Nothing to See Here, Move Along' show={this._noRowData()} />
@@ -104,6 +108,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    makeCalendar: (calendar) => dispatch(Actions.buildCalendar(calendar)),
     monthList: NavigationActions.monthList
   }
 }

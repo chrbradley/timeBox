@@ -48,6 +48,10 @@ export const buildCalendar = () => {
           day: dayOfYear
         }
 
+        if (day.start.format('MMM') !== month.start.format('MMM')) {
+          dayObj.notInMonth = true
+        }
+
         weekObj.data.push(dayObj)
       })
       monthObj.data.push(weekObj)
