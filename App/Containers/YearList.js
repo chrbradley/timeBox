@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { Text, ListView, View } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { Text, ListView, View, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
-// import { Actions as NavigationActions } from 'react-native-router-flux'
+import { Actions as NavigationActions } from 'react-native-router-flux'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessageComponent'
@@ -61,18 +61,24 @@ class YearList extends Component {
     })
   }
 
-  _renderRow (rowData) {
+  _renderRow = (rowData) => {
     let weeks = rowData.data
     return (
       <View style={styles.listRow}>
-        <Text style={styles.monthLabel}>{rowData.month}</Text>
-        {map(weeks, (week) => <Week key={week.key} week={week} />)}
+        <TouchableOpacity onPress={this.props.monthList}>
+          <Text style={styles.monthLabel}>{rowData.month}</Text>
+          {map(weeks, (week) => <Week key={week.key} week={week} />)}
+        </TouchableOpacity>
       </View>
     )
   }
 
   _noRowData () {
     return this.state.dataSource.getRowCount() === 0
+  }
+
+  static propTypes = {
+    monthList: PropTypes.func
   }
 
   render () {
@@ -98,6 +104,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    monthList: NavigationActions.monthList
   }
 }
 

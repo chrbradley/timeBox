@@ -18,6 +18,7 @@ import DeviceInfoScreen from '../Containers/DeviceInfoScreen'
 
 import Splash from '../Containers/Splash'
 import YearList from '../Containers/YearList'
+import MonthList from '../Containers/MonthList'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -29,7 +30,9 @@ class NavigationRouter extends Component {
       <Router>
         <Scene initial key='splash' component={Splash} title='Splash' hideNavBar />
 
-        <Scene initial key='year' component={YearList} title='Year' />
+        <Scene initial key='yearList' component={YearList} title='Year' />
+
+        <Scene key='monthList' component={MonthList} title='Month' />
 
         <Scene key='drawer' component={NavigationDrawer}>
 
