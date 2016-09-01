@@ -33,5 +33,5 @@ export default StyleSheet.create({
     alignSelf: 'center',
     color: Colors.snow,
     textAlign: 'center'
-  },
+  }
 })
