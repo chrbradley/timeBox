@@ -1,8 +1,8 @@
 import React from 'react'
-import { Dimensions, Text, ListView, View, TouchableOpacity } from 'react-native'
+import { Dimensions, Text, ListView, View, TouchableOpacity, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 // import Actions from '../Actions/Creators'
-// import { Actions as NavigationActions } from 'react-native-router-flux'
+import { Actions as NavigationActions } from 'react-native-router-flux'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessageComponent'
@@ -29,10 +29,14 @@ const Day = (props) => {
   )
 }
 
+const gotoDay = () => {
+  NavigationActions.dayList()
+}
+
 const Week = (props) => {
   let days = props.week.data
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={() => gotoDay()}>
       <View style={styles.monthRow}>
         {map(days, (day) => { return <Day key={day.key} day={day} /> })}
       </View>
@@ -69,10 +73,10 @@ class MonthList extends React.Component {
     const rowHeight = height * 0.1 * (weeks.length + 1)
 
     return (
-      <View style={[styles.listRow, {height: rowHeight}]}>
+      <ScrollView style={[styles.listRow, {height: rowHeight}]}>
         <Text style={styles.monthLabel}>{rowData.month}</Text>
-          {map(weeks, (week) => <Week key={week.key} week={week} />)}
-      </View>
+        {map(weeks, (week) => <Week key={week.key} week={week} />)}
+      </ScrollView>
     )
   }
 
@@ -97,7 +101,6 @@ class MonthList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    // calendar: state.calendar.calendar.asMutable()
   }
 }
 

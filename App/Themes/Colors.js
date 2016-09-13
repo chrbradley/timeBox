@@ -18,7 +18,12 @@ const colors = {
   snow: 'white',
   ember: 'rgba(164, 0, 48, 0.5)',
   fire: '#e73536',
-  drawer: 'rgba(30, 30, 29, 0.95)'
+  drawer: 'rgba(30, 30, 29, 0.95)',
+  bg1: '#ffe9e6',
+  bg2: '#ff9380',
+  bg3: '#ff5233',
+  bg4: '#e62200',
+  bg5: '#991700'
 }
 
 export default colors

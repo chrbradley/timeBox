@@ -64,3 +64,24 @@ export const buildCalendar = () => {
 
   return data
 }
+
+export const buildDay = () => {
+  let hours = 0
+  let startHour = 12
+
+  let data = []
+
+  while (hours < 24) {
+    if (hours === 1 || hours === 13) {
+      startHour = 1
+    }
+
+    let meridiem = hours < 13 ? 'AM' : 'PM'
+    let hour = hours === 12 ? 'Noon' : `${startHour} ${meridiem}`
+
+    data.push(hour)
+    startHour++
+    hours++
+  }
+  return data
+}
