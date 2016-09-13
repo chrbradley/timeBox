@@ -35,7 +35,7 @@ class NavigationRouter extends Component {
 
         <Scene key='monthList' component={MonthList} title='Month' />
 
-        <Scene key='dayList' component={DayList} title='Day' />
+        <Scene initial key='dayList' component={DayList} title='Day' />
 
         <Scene key='drawer' component={NavigationDrawer}>
 

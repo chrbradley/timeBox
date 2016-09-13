@@ -83,5 +83,5 @@ export const buildDay = () => {
     startHour++
     hours++
   }
-  console.log('data: ', data)
+  return data
 }

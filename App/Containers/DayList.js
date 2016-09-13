@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, Text } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 // import Actions from '../Actions/Creators'
 // import { Actions as NavigationActions } from 'react-native-router-flux'
@@ -20,13 +20,25 @@ class DayList extends React.Component {
   // }
 
   renderHours = () => {
-    buildDay()
+    let hours = buildDay()
+    return hours.map((hour, i) => {
+      return (
+        <View key={`${hour}_${i}`} style={styles.hourRow}>
+          <Text style={styles.hourLabel}>{hour}</Text>
+          <View style={styles.boxContainer}>
+            <View style={styles.box}><Text>15 min</Text></View>
+            <View style={styles.box}><Text>15 min</Text></View>
+            <View style={styles.box}><Text>15 min</Text></View>
+            <View style={styles.box}><Text>15 min</Text></View>
+          </View>
+        </View>
+      )
+    })
   }
 
   render () {
     return (
       <ScrollView style={styles.container}>
-        <Text>DayList Container</Text>
         {this.renderHours()}
       </ScrollView>
     )
