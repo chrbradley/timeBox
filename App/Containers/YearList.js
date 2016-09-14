@@ -13,11 +13,11 @@ import styles from './Styles/YearListStyle'
 
 // utilities
 import moment from 'moment'
-import { map } from 'lodash'
 import { buildCalendar } from '../Lib/CalendarHelpers'
 
 // detect changes
 const rowHasChanged = (r1, r2) => r1 !== r2
+
 // DataSource configured
 const ds = new ListView.DataSource({rowHasChanged})
 
@@ -34,7 +34,19 @@ const Week = (props) => {
   let days = props.week.data
   return (
     <View style={styles.monthRow}>
-      {map(days, (day) => { return <Day key={day.key} day={day} /> })}
+      {days.map((day) => { return <Day key={day.key} day={day} /> })}
+    </View>
+  )
+}
+
+const Month = (props) => {
+  const { month } = props
+  return (
+    <View style={styles.monthContainer}>
+      <TouchableOpacity>
+        <Text style={styles.monthLabel}>{month.month}</Text>
+        {month.data.map((week) => <Week key={week.key} week={week} />)}
+      </TouchableOpacity>
     </View>
   )
 }
@@ -58,18 +70,20 @@ class YearList extends Component {
     this.setState({
       building: false,
       year,
-      dataSource: ds.cloneWithRows(dataObjects[year])
+      dataSource: ds.cloneWithRows(dataObjects)
     })
   }
 
   _renderRow = (rowData) => {
-    let weeks = rowData.data
+    let { year, months } = rowData
     return (
-      <View style={styles.listRow}>
-        <TouchableOpacity onPress={this.props.monthList}>
-          <Text style={styles.monthLabel}>{rowData.month}</Text>
-          {map(weeks, (week) => <Week key={week.key} week={week} />)}
-        </TouchableOpacity>
+      <View style={styles.yearContainer}>
+        <View style={styles.yearLabelContainer}>
+          <Text style={styles.yearLabel}>{year}</Text>
+        </View>
+        <View style={styles.monthsContainer}>
+          {months.map((month) => <Month key={month.key} month={month} />)}
+        </View>
       </View>
     )
   }
@@ -86,11 +100,7 @@ class YearList extends Component {
     return (
       <View style={styles.container}>
         <AlertMessage title='Nothing to See Here, Move Along' show={this._noRowData()} />
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>{this.state.year}</Text>
-        </View>
         <ListView
-          contentContainerStyle={styles.listContent}
           dataSource={this.state.dataSource}
           renderRow={this._renderRow}
           initialListSize={12}
