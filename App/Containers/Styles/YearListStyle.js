@@ -2,40 +2,44 @@ import { Dimensions, StyleSheet } from 'react-native'
 import { ApplicationStyles, Metrics, Colors } from '../../Themes/'
 
 const { width } = Dimensions.get('window')
-const rowWidth = width * 0.3
-const rowHeight = rowWidth
-const dateWidth = rowWidth / 7
+const monthWidth = ((width - (Metrics.smallMargin * 2)) * 0.333) - (Metrics.smallMargin * 0.5)
+const monthHeight = monthWidth * 1.05
+const dateWidth = monthWidth / 7
 const dateHeight = dateWidth
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     marginTop: Metrics.navBarHeight,
+    marginHorizontal: Metrics.smallMargin,
     backgroundColor: Colors.background
   },
-  titleContainer: {
+  yearContainer: {
+  },
+  yearLabelContainer: {
     borderBottomWidth: 1,
     borderColor: Colors.steel
   },
-  title: {
-    margin: Metrics.smallMargin,
+  yearLabel: {
     fontSize: 24,
     fontWeight: '200'
   },
-  listContent: {
+  monthsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    justifyContent: 'center'
+    justifyContent: 'space-between',
+    marginTop: Metrics.smallMargin
   },
-  listRow: {
-    width: rowWidth,
-    height: rowHeight,
-    margin: Metrics.smallMargin,
+  monthContainer: {
+    width: monthWidth,
+    height: monthHeight,
     backgroundColor: Colors.background
   },
   monthLabel: {
-    fontSize: 14,
+    fontSize: 12,
     marginBottom: Metrics.smallMargin,
     color: Colors.fire
   },
@@ -50,7 +54,7 @@ export default StyleSheet.create({
   },
   dateText: {
     textAlign: 'center',
-    fontSize: 10,
+    fontSize: 8,
     color: Colors.coal
   },
   dateTextInactive: {

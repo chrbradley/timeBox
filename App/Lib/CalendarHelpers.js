@@ -1,65 +1,74 @@
 import Calendar from 'moment-calendar'
 import moment from 'moment'
 
-import { toUpper } from 'lodash'
+import { toUpper, range } from 'lodash'
 
 export const buildCalendar = () => {
   let year = moment().get('year')
+  let yearRange = range(year - 1, year + 1)
   let calendar = new Calendar()
 
-  let data = {}
-  data[year] = []
+  let data = []
 
-  calendar.setStart(new Date(year, 0, 1))
-  calendar.setEnd(new Date(year, 11, 31))
+  yearRange.forEach((year) => {
+    let yearObj = {}
+    yearObj.year = year
+    yearObj.months = []
 
-  let months = calendar.months(year)
+    calendar.setStart(new Date(year, 0, 1))
+    calendar.setEnd(new Date(year, 11, 31))
 
-  months.forEach((month) => {
-    let monthAbrv = toUpper(month.start.format('MMM'))
+    let months = calendar.months(year)
 
-    let key = `${year}_${monthAbrv}`
+    months.forEach((month) => {
+      let monthAbrv = toUpper(month.start.format('MMM'))
 
-    let monthObj = {
-      key,
-      month: monthAbrv,
-      data: []
-    }
+      let key = `${year}_${monthAbrv}`
 
-    let weeks = month.weeks()
-
-    weeks.forEach((week) => {
-      let weekNum = week.start.get('week')
-      let key = `${year}_${monthAbrv}_${weekNum}`
-
-      let weekObj = {
+      let monthObj = {
         key,
-        week: weekNum,
+        month: monthAbrv,
         data: []
       }
 
-      let days = week.days()
+      let weeks = month.weeks()
 
-      days.forEach((day) => {
-        let date = day.start.get('date')
-        let dayOfYear = day.start.get('dayOfYear')
-        let key = `${year}_${monthAbrv}_${weekNum}_${dayOfYear}`
+      /*
+      */
+      weeks.forEach((week) => {
+        let weekNum = week.start.get('week')
+        let key = `${year}_${monthAbrv}_${weekNum}`
 
-        let dayObj = {
+        let weekObj = {
           key,
-          date,
-          day: dayOfYear
+          week: weekNum,
+          data: []
         }
 
-        if (day.start.format('MMM') !== month.start.format('MMM')) {
-          dayObj.notInMonth = true
-        }
+        let days = week.days()
 
-        weekObj.data.push(dayObj)
+        days.forEach((day) => {
+          let date = day.start.get('date')
+          let dayOfYear = day.start.get('dayOfYear')
+          let key = `${year}_${monthAbrv}_${weekNum}_${dayOfYear}`
+
+          let dayObj = {
+            key,
+            date,
+            day: dayOfYear
+          }
+
+          if (day.start.format('MMM') !== month.start.format('MMM')) {
+            dayObj.notInMonth = true
+          }
+
+          weekObj.data.push(dayObj)
+        })
+        monthObj.data.push(weekObj)
       })
-      monthObj.data.push(weekObj)
+      yearObj.months.push(monthObj)
     })
-    data[year].push(monthObj)
+    data.push(yearObj)
   })
 
   return data
